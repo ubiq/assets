@@ -32,6 +32,11 @@ Array [
     "uuid": "6c1e671f-9af5-546d-9c1a-52067bdf0e53",
   },
   Object {
+    "name": "Ubiq",
+    "symbol": "UBQ",
+    "uuid": "fe5dbbce-a5ce-5e29-88b8-c69bcfdfde89",
+  },
+  Object {
     "address": "0xa74476443119A942dE498590Fe1f2454d7D4aC0d",
     "decimal": 18,
     "name": "Golem",
