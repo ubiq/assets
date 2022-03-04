@@ -14,7 +14,6 @@ export interface ParsedAsset {
   coinGeckoId?: string;
   cryptoCompareId?: string;
   cryptoCurrencyIconName?: string;
-  dexAgId?: string;
 }
 
 /**
@@ -30,6 +29,11 @@ export const BASE_ASSETS: Asset[] = [
     name: 'Ethereum Classic',
     symbol: 'ETC',
     uuid: '6c1e671f-9af5-546d-9c1a-52067bdf0e53'
+  },
+  {
+    name: 'Ubiq',
+    symbol: 'UBQ',
+    uuid: 'fe5dbbce-a5ce-5e29-88b8-c69bcfdfde89'
   }
 ];
 
@@ -55,8 +59,7 @@ export const ASSET_SCHEMA = object({
   coinCapId: string().optional(),
   coinGeckoId: string().optional(),
   cryptoCompareId: string().optional(),
-  cryptoCurrencyIconName: string().optional(),
-  dexAgId: string().optional()
+  cryptoCurrencyIconName: string().optional()
 });
 
 export const OUTPUT_PATH = resolve(__dirname, '../assets/assets.json');

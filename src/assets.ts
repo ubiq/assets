@@ -7,19 +7,17 @@ import {
   matchCoinCapId,
   matchCoinGeckoId,
   matchCryptoCompareId,
-  matchCryptoCurrencyIcon,
-  matchDexAgId
+  matchCryptoCurrencyIcon
 } from './services';
 
-const TOKEN_FILE_PATH = join(__dirname, '../tokens/eth.json');
+const TOKEN_FILE_PATH = join(__dirname, '../tokens/ubq.json');
 const ASSET_MATCHERS: Required<
   { [key in keyof ParsedAsset]: (asset: Asset) => Promise<string | null> | string | null }
 > = {
   coinCapId: matchCoinCapId,
   coinGeckoId: matchCoinGeckoId,
   cryptoCompareId: matchCryptoCompareId,
-  cryptoCurrencyIconName: matchCryptoCurrencyIcon,
-  dexAgId: matchDexAgId
+  cryptoCurrencyIconName: matchCryptoCurrencyIcon
 };
 
 /**
@@ -40,6 +38,8 @@ export const getIds = async (
         ...(await promise),
         [key]: id
       };
+    } else {
+      console.log('not found: ' + asset.symbol + ' ' + asset.uuid);
     }
 
     return {
@@ -56,7 +56,6 @@ export const getIds = async (
  */
 export const parseTokensJson = async (json: string): Promise<Asset[]> => {
   const tokens: Asset[] = JSON.parse(json);
-
   if (tokens.some(token => !isValidToken(token))) {
     throw new Error('Invalid token JSON scheme');
   }
@@ -70,7 +69,8 @@ export const parseTokensJson = async (json: string): Promise<Asset[]> => {
  * @return {Promise<Asset[]>}
  */
 export const fetchEthereumTokens = async (): Promise<Asset[]> => {
-  await execa('parse-eth-tokens', ['-o', 'tokens']);
+  // TODO(iquidus): currently generating this manually.
+  // await execa('parse-eth-tokens', ['-o', 'tokens']);
 
   const json = await fs.readFile(TOKEN_FILE_PATH, 'utf8');
   return parseTokensJson(json);
